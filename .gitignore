@@ -50,3 +50,6 @@ docker-compose.override.yml
 *.key
 service-account*.json
 firebase-service-account*.json
+
+# Ignore the entire .idea folder
+idea./
