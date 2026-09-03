@@ -180,3 +180,31 @@ Next steps:
 Add DB bootstrap script and update project README with local setup instructions.
 
 Optionally automate role/database creation in CI or dev container initialization.
+
+Database Seeding Script - Path Issue
+Problem
+Running python scripts/seed_database.py from the scripts/ directory causes:
+
+text
+ModuleNotFoundError: No module named 'app'
+Cause: Python can't find the app module because the script is executed from inside scripts/, not from the project root where app/ lives.
+
+Quick Solution
+Run from the project root (backend/ directory):
+
+bash
+cd /Users/pasanggurung/Documents/carelens/backend
+python scripts/seed_database.py
+Or use module syntax:
+
+bash
+cd /Users/pasanggurung/Documents/carelens/backend
+python -m scripts.seed_database
+Alternative Fix
+If you must run from scripts/, add this to the top of seed_database.py:
+
+python
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(**file**), '..')))
+This adds the parent directory to Python's import path.

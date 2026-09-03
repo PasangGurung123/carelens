@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import DateTime, String, func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
 
@@ -23,4 +23,14 @@ class Organization(Base):
         DateTime(timezone=True),
         server_default=func.now(),
         nullable=False,
+    )
+
+    members = relationship(
+        "Member",
+        back_populates="organization",
+    )
+
+    providers = relationship(
+        "Provider",
+        back_populates="organization",
     )
