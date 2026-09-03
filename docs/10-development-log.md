@@ -89,3 +89,52 @@ The database connection test passes.
 ### Next Step
 
 Design and implement the healthcare domain model, beginning with members, providers, and claims.
+
+## 2026-09-03 — Step 4: Healthcare Domain Model
+
+### Completed
+
+- Designed the initial healthcare relational model.
+- Added the `Member` model.
+- Added the `Provider` model.
+- Added the `Procedure` model.
+- Added the `Claim` model.
+- Added the `ClaimLine` model.
+- Added SQLAlchemy relationships between the entities.
+- Added foreign-key constraints.
+- Added unique constraints for business identifiers.
+- Added indexes for common lookup and join fields.
+- Created and applied the healthcare domain Alembic migration.
+- Added database integration tests.
+- Created a development database seeding script.
+- Added initial healthcare test data.
+- Verified relational queries using PostgreSQL.
+
+### Current Data Model
+
+```text
+Organization
+    |
+    +----< Members
+    |
+    +----< Providers
+
+Member
+    |
+    +----< Claims >---- Provider
+              |
+              +----< Claim Lines >---- Procedure
+```
+
+### Current Database Tables
+
+- organizations
+- members
+- providers
+- procedures
+- claims
+- claim_lines
+
+### Next Step
+
+Build the first database-backed FastAPI APIs for organizations, members, providers, and claims.
